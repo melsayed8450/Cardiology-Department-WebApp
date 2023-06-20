@@ -1,0 +1,30 @@
+{% for p in patients %}
+<div class="modal fade " id="patientInfoModal{{forloop.counter}}" tabindex="-1" aria-labelledby="patientInfoModalLabel{{forloop.counter}}" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="patientInfoModalLabel{{forloop.counter}}">{{p.name}}</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h3 class="text-primary">Personal info</h3>
+                <p>Name: {{p.name}}</p>
+                <p>Age: {{p.age}}</p>
+                <p>Gender: {{p.gender}}</p>
+                <hr>
+                <h3 class="text-primary">Insurance details</h3>
+                <p>{{p.insurance_details}}</p>
+                <hr>
+                <h3 class="text-primary">Medical history</h3>
+                <p>{{p.medical_history}}</p>
+                <hr>
+                <h3 class="text-primary">contact info</h3>
+                <p>Phone: {{p.phone_number}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}

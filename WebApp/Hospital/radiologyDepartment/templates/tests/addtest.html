@@ -1,0 +1,51 @@
+<div class="modal fade " id="addTestModal" tabindex="-1" aria-labelledby="addTestModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="addTestModalLabel">Add new test</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label  class="form-label">Name</label>
+            <input id="testName" type="text" class="form-control" placeholder="Enter the full name">
+          </div>
+          <div>
+            <label  class="form-label">Select the cardiologist</label>
+            <select id="cardiologistNameTestForm" class="form-select" aria-label="Default select example">
+              {% for c in cardiologists %}
+              <option value="{{c.name}}">{{c.name}}</option>
+              {%endfor%}
+            </select>
+          </div>
+          <div class="mb-3">
+            <label  class="form-label">Select the patient</label>
+            <select id="patientNameTestForm" class="form-select" aria-label="Default select example">
+             {% for p in patients%}
+              <option value="{{p.name}}">{{p.name}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="mb-3">
+            <label  class="form-label">Select the status</label>
+            <select id="testStatus" class="form-select" aria-label="Default select example">
+              
+              <option value="Ready">Ready</option>
+              <option value="Not Ready">Not Ready</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Cost</label>
+            <input id="testCost" type="number" class="form-control" placeholder="Enter the phone number">
+          </div>
+          
+        </div>
+        <div class="modal-footer">
+          <button onclick="add_test_onclick()" type="button" class="btn btn-primary">Add</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+        </div>
+      </div>
+    </div>
+  </div>

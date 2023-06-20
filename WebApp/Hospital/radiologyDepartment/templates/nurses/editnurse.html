@@ -1,0 +1,57 @@
+{% for nurse in nurses %}
+<div class="modal fade " id="editNurseModal{{forloop.counter}}" tabindex="-1" aria-labelledby="editNurseModalLabel{{forloop.counter}}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="editNurseModalLabel{{forloop.counter}}">Edit the nurse</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label  class="form-label">Name</label>
+            <input id="nurseNameEditForm{{forloop.counter}}" type="text" value="{{nurse.name}}" class="form-control" placeholder="Enter the full name">
+          </div>
+          <div class="mb-3">
+            <label  class="form-label">Age</label>
+            <input id="nurseAgeEditForm{{forloop.counter}}" type="number" value="{{nurse.age}}" class="form-control"  placeholder="Enter the phone number">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Select the patients seen by the nurse</label>
+            <ul class="list-group">
+              {% for name,age,phone,pname in nursesPatients %}
+                {% if name == nurse.name %}
+                <li class="list-group-item">
+                    <input  class="nursePatientEditForm{{forloop.parentloop.counter}} form-check-input me-1" type="checkbox" value="{{pname}}" checked>
+                    <span>{{pname}}</span>
+                </li>
+                {% else %}
+                <li class="list-group-item">
+                  <input class="nursePatientEditForm{{forloop.parentloop.counter}} form-check-input me-1" type="checkbox" value="{{pname}}" >
+                  <span>{{pname}}</span>
+              </li>
+                {% endif %}
+                {% endfor %}
+                {% for p in patients_without_nurse %}
+                <li class="list-group-item">
+                  <input  class="nursePatientEditForm{{forloop.parentloop.counter}} form-check-input me-1" type="checkbox" value="{{p.name}}" >
+                  <span>{{p.name}}</span>
+                </li>
+                {% endfor %}
+            </ul>
+          </div>
+
+          <div class="mb-3">
+            <label  class="form-label">Phone number</label>
+            <input id="nursePhonenumberEditForm{{forloop.counter}}" type="number" value="{{nurse.phone_number}}" class="form-control"  placeholder="Enter the phone number">
+          </div>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="edit_nurse_onclick_{{forloop.counter}}()" class="btn btn-primary">Edit</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}

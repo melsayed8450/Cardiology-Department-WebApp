@@ -1,0 +1,42 @@
+<div class="modal fade " id="addNurseModal" tabindex="-1" aria-labelledby="addNurseModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="addNurseModalLabel">Add new nurse</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label  class="form-label">Name</label>
+            <input id="nurseName" type="text" class="form-control" placeholder="Enter the full name">
+          </div>
+          <div class="mb-3">
+            <label  class="form-label">Age</label>
+            <input id="nurseAge" type="number" class="form-control"  placeholder="Enter the phone number">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Select the patients seen by the nurse</label>
+            <ul class="list-group">
+              {% for p in patients_without_nurse%}
+                <li class="list-group-item">
+                    <input  class="nursePatient form-check-input me-1" type="checkbox" value="{{p.name}}" >
+                    <span>{{p.name}}</span>
+                </li>
+                {% endfor %}
+            </ul>
+          </div>
+
+          <div class="mb-3">
+            <label  class="form-label">Phone number</label>
+            <input id="nursePhonenumber" type="number" class="form-control"  placeholder="Enter the phone number">
+          </div>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="add_nurse_onclick()" class="btn btn-primary">Add</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+        </div>
+      </div>
+    </div>
+  </div>

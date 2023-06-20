@@ -1,0 +1,35 @@
+{% for nurse in nurses %}
+<div class="modal fade " id="nurseInfoModal{{forloop.counter}}" tabindex="-1" aria-labelledby="nurseInfoModalLabel{{forloop.counter}}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="nurseInfoModalLabel{{forloop.counter}}">{{nurse.name}}</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h3 class="text-primary">Personal info</h3>
+                <p>Name: {{nurse.name}}</p>
+                <p>Age: {{nurse.age}}</p>
+                
+                <hr>
+                <h3 class="text-primary">Patients</h3>
+                <ol class="list-group list-group-numbered">
+                    {% for name,age,phone,pname in nursesPatients %}
+                    {% if name == nurse.name %}
+                    <li class="list-group-item">{{pname}}</li>
+                    {% endif %}
+                    {% endfor %}
+                    
+                </ol>
+                <hr>
+                
+                <h3 class="text-primary">contact info</h3>
+                <p>Phone: {{nurse.phone_number}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}

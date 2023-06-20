@@ -1,0 +1,30 @@
+{% for c in cardiologists %}
+<div class="modal fade " id="cardioInfoModal{{forloop.counter}}" tabindex="-1" aria-labelledby="cardioInfoModalLabel{{forloop.counter}" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="cardioInfoModalLabel{{forloop.counter}}">{{c.name}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h3 class="text-primary">Personal info</h3>
+        <p>Name: {{c.name}}</p>
+        <p>Age: {{c.age}}</p>
+        <p>Gender: {{c.gender}}</p>
+        <hr>
+        <h3 class="text-primary">Breif info</h3>
+        <p>{{c.brief_info}}</p>
+        <hr>
+        <h3 class="text-primary">specialization</h3>
+        <p>{{c.specialization}}</p>
+        <hr>
+        <h3 class="text-primary">contact info</h3>
+        <p>Phone: {{c.phone_number}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
