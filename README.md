@@ -11,7 +11,6 @@
 ```bash
 cd WebApp\Hospital
 ```
-And then to run the project 
 ```bash
 py manage.py runserver
 ```
