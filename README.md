@@ -2,14 +2,21 @@
 
 ## Installation
 
-- Add your python.exe path to WebApp/.venv/pyvenv.cfg
-
 - Then run these commands.
 ```bash
-&"WebApp\.venv\Scripts\Activate.ps1"
+cd WebApp
 ```
 ```bash
-cd WebApp\Hospital
+py -m venv env
+```
+```bash
+&"env\Scripts\Activate.ps1"
+```
+```bash
+cd Hospital
+```
+```bash
+pip install -r requirements.txt
 ```
 ```bash
 py manage.py runserver
