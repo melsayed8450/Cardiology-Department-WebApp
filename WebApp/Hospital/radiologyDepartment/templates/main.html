@@ -1,0 +1,166 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="{% static 'bootstrap.css' %}">
+  <link rel="stylesheet" href="{%static 'main.css' %}">
+
+  <script src="{% static 'main.js' %}"></script>
+  <script src="{% static 'bootstrap.js' %}"></script>
+
+  <script src="{% static 'Jquery.js' %}"></script>
+
+</head>
+
+<body>
+
+  <div class="container ">
+    <!--
+    <d>
+-->
+    
+    <!--nav-tabs list---------------->
+    <div class="pt-5 bg-light border  border-bottom-0 border-top-0 rounded  shadow-sm">
+      <h1 class="mx-auto text-dark">Cardiology Department</h1>
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link {{tab1}}" id="cardiologists-tab" data-bs-toggle="tab" data-bs-target="#cardiologists"
+            type="button" role="tab" aria-controls="cardiologists" aria-selected="false">Affiliated
+            Cardiologists</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link {{tab2}}" id="patients-tab" data-bs-toggle="tab" data-bs-target="#patients" type="button"
+            role="tab" aria-controls="patients" aria-selected="true">Patients</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link {{tab3}}" id="appointments-tab" data-bs-toggle="tab" data-bs-target="#appointments"
+            type="button" role="tab" aria-controls="appointments" aria-selected="false">Appointments</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link {{tab4}}" id="tests-tab" data-bs-toggle="tab" data-bs-target="#tests" type="button" role="tab"
+            aria-controls="tests" aria-selected="false">Tests</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link {{tab5}}" id="nurses-tab" data-bs-toggle="tab" data-bs-target="#nurses" type="button"
+            role="tab" aria-controls="nurses" aria-selected="false">Nurses</button>
+        </li>
+
+      </ul>
+    </div>
+    <div class="border  pb-3 mb-5 ps-3 pe-3 border-primary border-bottom-0 border-top-0 rounded  shadow-sm">
+      <div class="tab-content" id="myTabContent">
+        <!--cardio tab---------------------------->
+        {% include 'cardiology/cardiology.html' %}
+        <!--patients tab--------------------------->
+        {% include 'patients/patients.html' %}
+        <!--appointments tab-->
+        {% include 'appointment/appointment.html' %}
+        <!-- tests tab-->
+        {% include 'tests/test.html' %}
+        <!-- nurses tab -->
+        {% include 'nurses/nurses.html' %}
+
+
+
+
+      </div>
+    </div>
+
+
+    <!--Modals for cardio info---------------------------------------------------------------------------------->
+
+    {% include 'cardiology/showcardiology.html' %}
+
+    <!-- modals for add cardio------------------------------------------------------------------------------------------->
+    {% include 'cardiology/addcardiology.html' %}
+    <!-- modals for show patient------------------------------------------------------------------------------------------->
+    {% include 'patients/showpatient.html' %}
+    <!-- modals for make appointment------------------------------------------------------------------------------------------->
+    {% include 'appointment/scheduleappointment.html' %}
+    <!-- modals for add test------------------------------------------------------------------------------------------->
+    {% include 'tests/addtest.html' %}
+    <!-- modals for edit test------------------------------------------------------------------------------------------->
+    {% include 'tests/edittest.html' %}
+    <!--modals for show nurses-->
+    {% include 'nurses/shownurse.html' %}
+    <!--modals for add nurses-->
+    {% include 'nurses/editnurse.html' %}
+    <!--modals for edit nurses-->
+    {% include 'nurses/addnurse.html' %}
+  </div>
+  <script>
+    {% for name,c,p,cost,s,color in tests %}
+    function edit_test_onclick_{{forloop.counter}} (){
+      var name = document.getElementById("testName{{forloop.counter}}").value;
+      var patientName = document.getElementById("patientNameTestForm{{forloop.counter}}").value;
+      var cardiologistName = document.getElementById("cardiologistNameTestForm{{forloop.counter}}").value;
+      var cost = document.getElementById("testCost{{forloop.counter}}").value;
+      var status = document.getElementById("testStatus{{forloop.counter}}").value;
+      var id = {{ forloop.counter}};
+
+    csrf_token();
+    $.ajax({
+      type: "POST",
+      url: "editTest/",
+      data: {
+        "name": name,
+        "patientName": patientName,
+        "cardiologistName": cardiologistName,
+        "cost": cost,
+        "status": status,
+        "id": id,
+      },
+      success: function (response) {
+        if (response == "Successfully edited") {
+          alert(response);
+          window.location.replace("Tests");
+        } else {
+          alert(response);
+        }
+      }
+    });
+      }
+    {% endfor %}
+
+    {% for nurse in nurses %}
+    function edit_nurse_onclick_{{forloop.counter}} (){
+      var name = document.getElementById("nurseNameEditForm{{forloop.counter}}").value;
+      var phonenumber = document.getElementById("nursePhonenumberEditForm{{forloop.counter}}").value;
+      var patients = []
+      var selectedPatients = document.getElementsByClassName("nursePatientEditForm{{forloop.counter}}");
+      for (var element of selectedPatients) {
+        if (element.checked) {
+          patients.push(element.value)
+        }
+      }
+
+      var age = document.getElementById("nurseAgeEditForm{{forloop.counter}}").value;
+      
+
+      csrf_token();
+      $.ajax({
+        type: "POST",
+        url: "editNurse/",
+        data: {
+          "name": name,
+          "phonenumber": phonenumber,
+          "patients": "[" + patients + "]",
+          "age": age,
+          "id":{{forloop.counter}}
+        },
+        success: function (response) {
+          if (response == "Successfully edited") {
+            alert(response);
+            window.location.replace("Nurses");
+          } else {
+            alert(response);
+          }
+        }
+      });
+    }
+    {% endfor %}
+  </script>
+</body>
+
+</html>

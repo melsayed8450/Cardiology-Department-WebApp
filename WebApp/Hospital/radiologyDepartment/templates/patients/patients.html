@@ -1,0 +1,37 @@
+{% load static %}
+<div class="tab-pane fade pt-3" id="patients" role="tabpanel" aria-labelledby="patients-tab">
+    <!-- patients lists-->
+    <div class="row row-cols-1 row-cols-md-5 g-4">
+        <!--patients cards-->
+
+        {% for p in patients %}
+        <div class="col">
+           
+            <div class="card cardlist h-100">
+                <img src="{%static 'cardiologyicon.png'%}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{p.name}}</h5>
+
+                </div>
+                <button type="button" class="btn btn-outline-primary m-3" data-bs-toggle="modal"
+                    data-bs-target="#patientInfoModal{{forloop.counter}}">show</button>
+            </div>
+           
+        </div>
+        {% endfor %}
+    </div>
+    <!-- bottom form -->
+<!--
+    <div class="row row-cols-4 flex-row-reverse pt-3">
+
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="p-3 btn btn-outline-primary" data-bs-toggle="modal"
+                data-bs-target="#addPatientModal">Add</button>
+
+
+
+        </div>
+
+    </div>
+-->
+</div>

@@ -1,0 +1,36 @@
+{% load static %}
+<div class="tab-pane fade show active pt-3" id="cardiologists" role="tabpanel"
+        aria-labelledby="cardiologists-tab">
+        <!-- aff cardio lists-->
+        <div class="row row-cols-1 row-cols-md-5 g-4">
+          <!--cardio cards-->
+          
+          {% for c in cardiologists %}
+          <div class="col">
+            <div class="card cardlist h-100">
+              <img src="{%static 'cardiologyicon.png'%}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Dr. {{c.name}}</h5>
+                
+              </div>
+              <button type="button" class="btn btn-outline-primary m-3" data-bs-toggle="modal"
+                data-bs-target="#cardioInfoModal{{forloop.counter}}">show</button>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <!-- bottom form -->
+        
+        <div class="row row-cols-4 flex-row-reverse pt-3">
+
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="p-3 btn btn-outline-primary" data-bs-toggle="modal"
+              data-bs-target="#addCardioModal">Add</button>
+      
+      
+      
+          </div>
+      
+        </div>
+
+      </div>
