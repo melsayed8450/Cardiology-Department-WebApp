@@ -1,6 +1,0 @@
-.cardlist:hover{
-    transform: scale(1.03);
-    transition-timing-function: ease-in-out;
-    box-shadow: 0 8px 8px #0d6efd;
-    transition: transform 1s;
-}
