@@ -1,5 +1,5 @@
 {% load static %}
-<div class="tab-pane fade pt-3" id="patients" role="tabpanel" aria-labelledby="patients-tab">
+<div class="tab-pane fade {% if tab2 %} show {{tab2}} {% endif %} pt-3" id="patients" role="tabpanel" aria-labelledby="patients-tab">
     <!-- patients lists-->
     <div class="row row-cols-1 row-cols-md-5 g-4">
         <!--patients cards-->

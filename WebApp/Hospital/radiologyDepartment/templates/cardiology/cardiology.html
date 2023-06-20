@@ -1,5 +1,5 @@
 {% load static %}
-<div class="tab-pane fade show active pt-3" id="cardiologists" role="tabpanel"
+<div class="tab-pane fade {% if tab1 %} show {{tab1}} {% endif %} pt-3" id="cardiologists" role="tabpanel"
         aria-labelledby="cardiologists-tab">
         <!-- aff cardio lists-->
         <div class="row row-cols-1 row-cols-md-5 g-4">
